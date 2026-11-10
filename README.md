@@ -1,31 +1,31 @@
 # Personal Agent System OpenCode V1
 
-## Qué es este proyecto
+## What is this project
 
-Personal Agent System es un sistema de organización personal y creación de contenido construido sobre OpenCode. Coordina planificación, investigación y redacción mediante agentes, comandos y archivos de contexto. El proyecto original incluye un orquestador de estrategia personal, un asistente de investigación y un estratega de contenido, junto con comandos para planes diarios, revisiones, investigación, artículos y hilos de redes sociales. También incluye archivos de contexto para la voz de marca, los patrones de blog y redes sociales y los objetivos personales, y utiliza Brave Search y Git mediante MCP.
+Personal Agent System is a personal organization and content creation system built on OpenCode. It coordinates planning, research, and writing through agents, commands, and context files. The original project includes a personal strategy orchestrator, a research assistant, and a content strategist, along with commands for daily plans, reviews, research, articles, and social media threads. It also includes context files for brand voice, blog and social media patterns, and personal goals, and uses Brave Search and Git through MCP.
 
-Un fork es una copia de un proyecto que evoluciona de forma independiente y conserva la atribución al proyecto original. Este fork parte de [darrenhinde/personal-agent-systems](https://github.com/darrenhinde/personal-agent-systems) y mantiene su estructura de agentes, comandos y contexto.
+A fork is a copy of a project that evolves independently and preserves attribution to the original project. This fork starts from [darrenhinde/personal-agent-systems](https://github.com/darrenhinde/personal-agent-systems) and maintains its agent, command, and context structure.
 
-### Qué aporta este fork
+### What this fork adds
 
-- OpenCode 1.19.5 (V1) como versión objetivo.
-- Brave, Tavily y DeepSeek como proveedores de búsqueda.
-- DeepSeek como proveedor por defecto y selección mediante `[search:brave]`, `[search:tavily]` o `[search:deepseek]`.
-- Uso del modelo activo de la TUI, sin modelos ni temperaturas fijas.
-- Permisos de mínimo privilegio por agente.
-- DeepSeek integrado como tool del repositorio, sin MCP local ni procesos adicionales.
-- Instalación portable con `install.sh` y carga automática de `.env` al iniciar OpenCode.
-- Documentación de instalación, configuración, comandos, permisos y solución de problemas.
+- OpenCode 1.19.5 (V1) as the target version.
+- Brave, Tavily, and DeepSeek as search providers.
+- DeepSeek as the default provider, selectable with `[search:brave]`, `[search:tavily]`, or `[search:deepseek]`.
+- Use of the active TUI model, with no fixed models or temperatures.
+- Least-privilege permissions per agent.
+- DeepSeek integrated as a repository tool, without a local MCP or additional processes.
+- Portable installation with `install.sh` and automatic `.env` loading at OpenCode startup.
+- Documentation for installation, configuration, commands, permissions, and troubleshooting.
 
-Este fork no incluye un archivo `LICENSE`. Conserva la referencia al proyecto original y no añade ni sustituye licencias.
+This fork does not include a `LICENSE` file. It preserves the reference to the original project and does not add or replace licenses.
 
-## Requisitos
+## Requirements
 
 - OpenCode 1.19.5.
-- Node.js 20 o superior y `npx` para el servidor MCP de Brave.
-- Una clave de Tavily y otra de DeepSeek para usar esos proveedores.
+- Node.js 20 or later, and `npx` for the Brave MCP server.
+- A Tavily key and a DeepSeek key to use those providers.
 
-## Inicio rápido
+## Quick start
 
 ```bash
 git clone https://github.com/paginaviva/personal-agent-systems-opencode-v1.git
@@ -33,7 +33,7 @@ cd personal-agent-systems-opencode-v1
 ./install.sh
 ```
 
-Edita `.env` y añade las claves:
+Edit `.env` and add the keys:
 
 ```bash
 BRAVE_API_KEY=
@@ -41,67 +41,67 @@ TAVILY_API_KEY=
 DEEPSEEK_API_KEY=
 ```
 
-Después inicia OpenCode desde la raíz del repositorio:
+Then start OpenCode from the repository root:
 
 ```bash
 opencode
 ```
 
-Dentro de la TUI, selecciona `life-strategy-agent` con `Tab` o `Shift+Tab`, o abre la lista de agentes con `Ctrl+X` y luego `A`. `opencode.json` ya lo establece como agente por defecto, así que puede aparecer seleccionado al iniciar.
+Inside the TUI, select `life-strategy-agent` with `Tab` or `Shift+Tab`, or open the agent list with `Ctrl+X` and then `A`. `opencode.json` already sets it as the default agent, so it may appear selected at startup.
 
-No es necesario exportar las variables manualmente: `.opencode/plugins/env-loader.ts` lee `.env` al iniciar y aplica las claves a la configuración.
+There is no need to export the variables manually: `.opencode/plugins/env-loader.ts` reads `.env` at startup and applies the keys to the configuration.
 
-## Variables de entorno
+## Environment variables
 
-| Variable | Obligatoria | Uso |
+| Variable | Required | Purpose |
 |---|---|---|
-| `BRAVE_API_KEY` | No | Búsqueda con Brave. Sin clave, el servidor MCP no arranca, pero el resto del sistema funciona. |
-| `TAVILY_API_KEY` | Para Tavily | Búsqueda con Tavily. |
-| `DEEPSEEK_API_KEY` | Para DeepSeek | Búsqueda con DeepSeek. |
-| `PAS_DEFAULT_PROVIDER` | No | Proveedor por defecto. Valor inicial: `deepseek`. |
-| `PAS_MAX_RESULTS` | No | Resultados por búsqueda. Valor inicial: `5`. |
-| `PAS_TIMEOUT_MS` | No | Tiempo máximo de búsqueda. Valor inicial: `30000`. |
+| `BRAVE_API_KEY` | No | Brave search. Without a key, the MCP server does not start, but the rest of the system works. |
+| `TAVILY_API_KEY` | For Tavily | Tavily search. |
+| `DEEPSEEK_API_KEY` | For DeepSeek | DeepSeek search. |
+| `PAS_DEFAULT_PROVIDER` | No | Default provider. Initial value: `deepseek`. |
+| `PAS_MAX_RESULTS` | No | Results per search. Initial value: `5`. |
+| `PAS_TIMEOUT_MS` | No | Maximum search time. Initial value: `30000`. |
 
-El cargador de `.env` acepta también los alias `TAVILY_API_RESEARCHER` y `DeepSeek_Search_API`.
+The `.env` loader also accepts the aliases `TAVILY_API_RESEARCHER` and `DeepSeek_Search_API`.
 
-## Proveedores y directivas
+## Providers and directives
 
-| Proveedor | Integración | Directiva |
+| Provider | Integration | Directive |
 |---|---|---|
-| Brave | MCP local existente con `npx` | `[search:brave]` |
-| Tavily | MCP remoto con cabecera `Authorization` | `[search:tavily]` |
-| DeepSeek | Tool del plugin `pas-router` | `[search:deepseek]` |
+| Brave | Existing local MCP with `npx` | `[search:brave]` |
+| Tavily | Remote MCP with an `Authorization` header | `[search:tavily]` |
+| DeepSeek | `pas-router` plugin tool | `[search:deepseek]` |
 
-Si no hay directiva, se usa DeepSeek. El orquestador delega en el subagente correspondiente; no busca directamente.
+If there is no directive, DeepSeek is used. The orchestrator delegates to the corresponding subagent; it does not search directly.
 
-## Agentes
+## Agents
 
-| Agente | Modo | Función |
+| Agent | Mode | Purpose |
 |---|---|---|
-| `life-strategy-agent` | primary | Orquesta planificación, investigación y contenido. |
-| `research-brave` | subagent | Investiga con Brave. Solo lectura. |
-| `research-tavily` | subagent | Investiga con Tavily. Solo lectura. |
-| `research-deepseek` | subagent | Investiga con DeepSeek. Solo lectura. |
-| `content-strategy-agent` | subagent | Escribe y edita contenido en `content/`. |
+| `life-strategy-agent` | primary | Orchestrates planning, research, and content. |
+| `research-brave` | subagent | Researches with Brave. Read-only. |
+| `research-tavily` | subagent | Researches with Tavily. Read-only. |
+| `research-deepseek` | subagent | Researches with DeepSeek. Read-only. |
+| `content-strategy-agent` | subagent | Writes and edits content in `content/`. |
 
-Ningún agente fija un modelo. Todos usan el modelo activo de la sesión de OpenCode.
+No agent sets a fixed model. All use the active OpenCode session model.
 
-## Comandos
+## Commands
 
-- `/research` — investiga con el proveedor indicado o con DeepSeek.
-- `/blog-post` — escribe un artículo en `content/blog-posts/`.
-- `/twitter-thread` — escribe un hilo en `content/social-media/`.
-- `/daily-plan`, `/daily-setup`, `/evening-review`, `/weekly-review`, `/monthly-review` — planificación y revisiones.
+- `/research` — researches with the specified provider or with DeepSeek.
+- `/blog-post` — writes an article in `content/blog-posts/`.
+- `/twitter-thread` — writes a thread in `content/social-media/`.
+- `/daily-plan`, `/daily-setup`, `/evening-review`, `/weekly-review`, `/monthly-review` — planning and reviews.
 
-## Permisos
+## Permissions
 
-- El orquestador escribe solo en `plans/` y `research/`.
-- Los subagentes de investigación no escriben, no usan la shell y solo acceden a su proveedor.
-- El agente de contenido escribe solo en `content/`.
-- La tool integrada `websearch` está denegada.
-- Los secretos se cargan desde `.env` al iniciar; `.env` no se versiona.
+- The orchestrator writes only in `plans/` and `research/`.
+- Research subagents do not write, do not use the shell, and only access their provider.
+- The content agent writes only in `content/`.
+- The built-in `websearch` tool is denied.
+- Secrets are loaded from `.env` at startup; `.env` is not versioned.
 
-## Estructura
+## Structure
 
 ```text
 .
@@ -125,37 +125,37 @@ Ningún agente fija un modelo. Todos usan el modelo activo de la sesión de Open
 └── opencode.json
 ```
 
-## Comprobación básica
+## Basic check
 
 ```bash
 ./scripts/smoke-test.sh
 ```
 
-Con `--live`, el script intenta una búsqueda real con Tavily y otra con DeepSeek. Consume cuota de los proveedores.
+With `--live`, the script attempts one real search with Tavily and another with DeepSeek. It consumes provider quota.
 
-## Instalación en un entorno limpio
+## Installation in a clean environment
 
 ```bash
 git clone https://github.com/paginaviva/personal-agent-systems-opencode-v1.git /tmp/pas-clean
 cd /tmp/pas-clean
 ./install.sh
-# edita .env
+# edit .env
 opencode
 ```
 
-Selecciona `life-strategy-agent` dentro de la TUI. La carga de `.env` la realiza el plugin del repositorio; no se necesitan scripts de inicio ni exportación manual.
+Select `life-strategy-agent` inside the TUI. The repository plugin loads `.env`; no startup scripts or manual export are required.
 
-No se usan rutas absolutas ni configuraciones específicas del equipo de desarrollo.
+No absolute paths or machine-specific configurations are used.
 
-## Solución de problemas
+## Troubleshooting
 
-- **Las claves no se cargan:** revisa que `.env` esté en la raíz del repositorio. `.opencode/plugins/env-loader.ts` lo lee al iniciar; no hace falta exportar variables.
-- **Brave no arranca:** falta `BRAVE_API_KEY`. Es opcional; el resto de proveedores sigue funcionando.
-- **Tavily no responde:** revisa `TAVILY_API_KEY` y la conexión a `https://mcp.tavily.com/mcp/`.
-- **DeepSeek no responde:** revisa `DEEPSEEK_API_KEY` y el saldo de la cuenta.
-- **OpenCode no carga un agente:** ejecuta `opencode agent list` y `opencode debug agent <nombre>`.
-- **Falta `@opencode-ai/plugin`:** OpenCode instala las dependencias de `.opencode/package.json` al iniciar. Si falla, revisa la conexión y vuelve a abrir OpenCode.
+- **Keys are not loaded:** check that `.env` is in the repository root. `.opencode/plugins/env-loader.ts` reads it at startup; there is no need to export variables.
+- **Brave does not start:** `BRAVE_API_KEY` is missing. It is optional; the other providers keep working.
+- **Tavily does not respond:** check `TAVILY_API_KEY` and the connection to `https://mcp.tavily.com/mcp/`.
+- **DeepSeek does not respond:** check `DEEPSEEK_API_KEY` and the account balance.
+- **OpenCode does not load an agent:** run `opencode agent list` and `opencode debug agent <name>`.
+- **`@opencode-ai/plugin` is missing:** OpenCode installs the dependencies from `.opencode/package.json` at startup. If it fails, check the connection and reopen OpenCode.
 
-## Atribución
+## Attribution
 
-Basado en [darrenhinde/personal-agent-systems](https://github.com/darrenhinde/personal-agent-systems), confirmación `5f6a35b`. Este fork añade los proveedores Tavily y DeepSeek, la selección de proveedor por directiva, permisos por agente y la adaptación al modelo activo de OpenCode 1.19.5.
+Based on [darrenhinde/personal-agent-systems](https://github.com/darrenhinde/personal-agent-systems), commit `5f6a35b`. This fork adds the Tavily and DeepSeek providers, provider selection by directive, per-agent permissions, and adaptation to the active OpenCode 1.19.5 model.
