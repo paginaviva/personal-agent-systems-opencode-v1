@@ -60,7 +60,6 @@ There is no need to export the variables manually: `.opencode/plugins/env-loader
 | `BRAVE_API_KEY` | No | Brave search. Without a key, the MCP server does not start, but the rest of the system works. |
 | `TAVILY_API_KEY` | For Tavily | Tavily search. |
 | `DEEPSEEK_API_KEY` | For DeepSeek | DeepSeek search. |
-| `PAS_DEFAULT_PROVIDER` | No | Default provider. Initial value: `deepseek`. |
 | `PAS_MAX_RESULTS` | No | Results per search. Initial value: `5`. |
 | `PAS_TIMEOUT_MS` | No | Maximum search time. Initial value: `30000`. |
 
@@ -98,7 +97,7 @@ No agent sets a fixed model. All use the active OpenCode session model.
 ## Permissions
 
 - The orchestrator writes only in `plans/` and `research/`.
-- Research subagents do not write, do not use the shell, and only access their provider.
+- Research subagents do not write, do not use the shell, and only access their provider and `webfetch` for follow-up.
 - The content agent writes only in `content/`.
 - The built-in `websearch` tool is denied.
 - Secrets are loaded from `.env` at startup; `.env` is not versioned.

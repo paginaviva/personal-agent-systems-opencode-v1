@@ -10,7 +10,6 @@ const allowed = new Set([
   "URL_TAVILY_REMOTE_MCP",
   "DEEPSEEK_API_KEY",
   "DeepSeek_Search_API",
-  "PAS_DEFAULT_PROVIDER",
   "PAS_MAX_RESULTS",
   "PAS_TIMEOUT_MS",
 ])
