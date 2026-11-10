@@ -1,5 +1,7 @@
 # Personal Agent System OpenCode V1
 
+Este documento también está disponible en español: [README-ES.md](README-ES.md).
+
 ## What is this project
 
 Personal Agent System is a personal organization and content creation system built on OpenCode. It coordinates planning, research, and writing through agents, commands, and context files. The original project includes a personal strategy orchestrator, a research assistant, and a content strategist, along with commands for daily plans, reviews, research, articles, and social media threads. It also includes context files for brand voice, blog and social media patterns, and personal goals, and uses Brave Search and Git through MCP.
