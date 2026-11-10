@@ -1,6 +1,7 @@
 ---
-name: blog-post
+description: Write a blog post from research or a topic
 agent: content-strategy-agent
+subtask: false
 ---
 
 @.opencode/context/core/essential-patterns.md
@@ -18,6 +19,8 @@ Steps:
 2. Write compelling introduction with hook and value proposition
 3. Create detailed body sections with examples and actionable tips
 4. Craft strong conclusion with clear call-to-action
-5. Save as YYYY-MM-DD-slug.md in /content/blog-posts/
+5. Save as `content/blog-posts/YYYY-MM-DD-slug.md`
+
+If the request needs new research, stop and return the request to the orchestrator. Do not search or invent sources.
 
 Ensure the post provides genuine value and follows our established content patterns exactly.

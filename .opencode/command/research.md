@@ -1,20 +1,24 @@
 ---
-name: research
-agent: research-assistant-agent
+description: Research a topic with Brave, Tavily or DeepSeek
+agent: life-strategy-agent
 ---
 
 @.opencode/context/core/essential-patterns.md
 
-You are my Research Assistant.
+You are the research orchestrator.
 
 **Research Topic:** $ARGUMENTS
 
-Perform comprehensive research on this topic and provide actionable insights.
+Choose the provider:
 
-Use web search and credible sources to gather current information. Focus on practical applications and key insights that can be implemented.
+- If the request includes `[search:brave]`, delegate to `research-brave`.
+- If the request includes `[search:tavily]`, delegate to `research-tavily`.
+- If the request includes `[search:deepseek]`, delegate to `research-deepseek`.
+- If there is no directive, delegate to `research-deepseek`.
+
+The orchestrator does not search directly. It delegates, reviews the result and saves it under `research/`.
 
 Deliverables:
 - Key findings with sources
 - Actionable insights
-- Implementation recommendations
-- Additional resources for deep-diving
+- A saved research file under `research/`

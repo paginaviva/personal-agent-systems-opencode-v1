@@ -1,5 +1,5 @@
 ---
-name: weekly-review
+description: Run the weekly review
 agent: life-strategy-agent
 ---
 

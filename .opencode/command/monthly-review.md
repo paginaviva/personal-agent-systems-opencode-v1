@@ -1,5 +1,5 @@
 ---
-name: monthly-review
+description: Run the monthly review
 agent: life-strategy-agent
 ---
 

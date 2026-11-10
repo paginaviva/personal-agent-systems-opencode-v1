@@ -1,5 +1,5 @@
 ---
-name: daily-setup
+description: Prepare the daily setup and priorities
 agent: life-strategy-agent
 ---
 

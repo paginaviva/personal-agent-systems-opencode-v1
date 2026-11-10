@@ -1,5 +1,5 @@
 ---
-name: evening-review
+description: Run the evening review
 agent: life-strategy-agent
 ---
 

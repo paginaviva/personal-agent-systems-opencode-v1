@@ -1,5 +1,5 @@
 ---
-name: daily-plan
+description: Create a prioritized daily plan
 agent: life-strategy-agent
 ---
 
