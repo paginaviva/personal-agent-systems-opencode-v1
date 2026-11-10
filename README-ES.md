@@ -60,8 +60,8 @@ No es necesario exportar las variables manualmente: `.opencode/plugins/env-loade
 | `BRAVE_API_KEY` | No | Búsqueda con Brave. Sin clave, el servidor MCP no arranca, pero el resto del sistema funciona. |
 | `TAVILY_API_KEY` | Para Tavily | Búsqueda con Tavily. |
 | `DEEPSEEK_API_KEY` | Para DeepSeek | Búsqueda con DeepSeek. |
-| `PAS_MAX_RESULTS` | No | Resultados por búsqueda. Valor inicial: `5`. |
-| `PAS_TIMEOUT_MS` | No | Tiempo máximo de búsqueda. Valor inicial: `30000`. |
+| `PAS_MAX_RESULTS` | No | Resultados de DeepSeek por búsqueda. Valor inicial: `5`. |
+| `PAS_TIMEOUT_MS` | No | Tiempo máximo de búsqueda de DeepSeek. Valor inicial: `30000`. |
 
 El cargador de `.env` acepta también los alias `TAVILY_API_RESEARCHER` y `DeepSeek_Search_API`.
 
