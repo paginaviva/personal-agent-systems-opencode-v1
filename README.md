@@ -1,6 +1,21 @@
-# Personal Agent Systems — OpenCode V1
+# Personal Agent System OpenCode V1
 
-Fork de [Personal Agent Systems](https://github.com/darrenhinde/personal-agent-systems) adaptado para OpenCode 1.19.5. Mantiene el modelo de trabajo original —clonar el repositorio y ejecutar OpenCode dentro— y añade búsqueda con Brave, Tavily y DeepSeek.
+## Qué es este proyecto
+
+Personal Agent System es un sistema de organización personal y creación de contenido construido sobre OpenCode. Coordina planificación, investigación y redacción mediante agentes, comandos y archivos de contexto. El proyecto original incluye un orquestador de estrategia personal, un asistente de investigación y un estratega de contenido, junto con comandos para planes diarios, revisiones, investigación, artículos y hilos de redes sociales. También incluye archivos de contexto para la voz de marca, los patrones de blog y redes sociales y los objetivos personales, y utiliza Brave Search y Git mediante MCP.
+
+Un fork es una copia de un proyecto que evoluciona de forma independiente y conserva la atribución al proyecto original. Este fork parte de [darrenhinde/personal-agent-systems](https://github.com/darrenhinde/personal-agent-systems) y mantiene su estructura de agentes, comandos y contexto.
+
+### Qué aporta este fork
+
+- OpenCode 1.19.5 (V1) como versión objetivo.
+- Brave, Tavily y DeepSeek como proveedores de búsqueda.
+- DeepSeek como proveedor por defecto y selección mediante `[search:brave]`, `[search:tavily]` o `[search:deepseek]`.
+- Uso del modelo activo de la TUI, sin modelos ni temperaturas fijas.
+- Permisos de mínimo privilegio por agente.
+- DeepSeek integrado como tool del repositorio, sin MCP local ni procesos adicionales.
+- Instalación portable con `install.sh` y carga automática de `.env` al iniciar OpenCode.
+- Documentación de instalación, configuración, comandos, permisos y solución de problemas.
 
 Este fork no incluye un archivo `LICENSE`. Conserva la referencia al proyecto original y no añade ni sustituye licencias.
 
@@ -26,20 +41,15 @@ TAVILY_API_KEY=
 DEEPSEEK_API_KEY=
 ```
 
-Después inicia OpenCode:
+Después inicia OpenCode desde la raíz del repositorio:
 
 ```bash
-./scripts/opencode-pas
-```
-
-También puedes usar el procedimiento original: exportar las variables y ejecutar `opencode` directamente.
-
-```bash
-set -a
-. ./.env
-set +a
 opencode
 ```
+
+Dentro de la TUI, selecciona `life-strategy-agent` con `Tab` o `Shift+Tab`, o abre la lista de agentes con `Ctrl+X` y luego `A`. `opencode.json` ya lo establece como agente por defecto, así que puede aparecer seleccionado al iniciar.
+
+No es necesario exportar las variables manualmente: `.opencode/plugins/env-loader.ts` lee `.env` al iniciar y aplica las claves a la configuración.
 
 ## Variables de entorno
 
@@ -52,7 +62,7 @@ opencode
 | `PAS_MAX_RESULTS` | No | Resultados por búsqueda. Valor inicial: `5`. |
 | `PAS_TIMEOUT_MS` | No | Tiempo máximo de búsqueda. Valor inicial: `30000`. |
 
-`scripts/load-env.sh` acepta también los alias `TAVILY_API_RESEARCHER` y `DeepSeek_Search_API`.
+El cargador de `.env` acepta también los alias `TAVILY_API_RESEARCHER` y `DeepSeek_Search_API`.
 
 ## Proveedores y directivas
 
@@ -89,7 +99,7 @@ Ningún agente fija un modelo. Todos usan el modelo activo de la sesión de Open
 - Los subagentes de investigación no escriben, no usan la shell y solo acceden a su proveedor.
 - El agente de contenido escribe solo en `content/`.
 - La tool integrada `websearch` está denegada.
-- Los secretos se leen desde el entorno; `.env` no se versiona.
+- Los secretos se cargan desde `.env` al iniciar; `.env` no se versiona.
 
 ## Estructura
 
@@ -99,6 +109,7 @@ Ningún agente fija un modelo. Todos usan el modelo activo de la sesión de Open
 │   ├── agent/
 │   ├── command/
 │   ├── context/
+│   ├── plugins/env-loader.ts
 │   ├── plugins/pas-router.ts
 │   ├── package.json
 │   └── package-lock.json
@@ -107,7 +118,6 @@ Ningún agente fija un modelo. Todos usan el modelo activo de la sesión de Open
 ├── research/
 ├── scripts/
 │   ├── load-env.sh
-│   ├── opencode-pas
 │   └── smoke-test.sh
 ├── .env.example
 ├── .gitignore
@@ -130,13 +140,16 @@ git clone https://github.com/paginaviva/personal-agent-systems-opencode-v1.git /
 cd /tmp/pas-clean
 ./install.sh
 # edita .env
-./scripts/opencode-pas
+opencode
 ```
+
+Selecciona `life-strategy-agent` dentro de la TUI. La carga de `.env` la realiza el plugin del repositorio; no se necesitan scripts de inicio ni exportación manual.
 
 No se usan rutas absolutas ni configuraciones específicas del equipo de desarrollo.
 
 ## Solución de problemas
 
+- **Las claves no se cargan:** revisa que `.env` esté en la raíz del repositorio. `.opencode/plugins/env-loader.ts` lo lee al iniciar; no hace falta exportar variables.
 - **Brave no arranca:** falta `BRAVE_API_KEY`. Es opcional; el resto de proveedores sigue funcionando.
 - **Tavily no responde:** revisa `TAVILY_API_KEY` y la conexión a `https://mcp.tavily.com/mcp/`.
 - **DeepSeek no responde:** revisa `DEEPSEEK_API_KEY` y el saldo de la cuenta.

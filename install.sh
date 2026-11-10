@@ -76,6 +76,7 @@ warn_empty DEEPSEEK_API_KEY || warn_empty DeepSeek_Search_API || true
 echo
 echo "Siguiente paso:"
 echo "  1. Edita .env con tus claves."
-echo "  2. Ejecuta ./scripts/opencode-pas"
+echo "  2. Ejecuta opencode desde la raíz del repositorio."
+echo "  3. Selecciona life-strategy-agent con Tab/Shift+Tab o Ctrl+X A."
 echo
-echo "También puedes clonar el repositorio y ejecutar opencode directamente si las variables ya están exportadas."
+echo "El plugin env-loader lee .env al iniciar; no hace falta exportar variables."

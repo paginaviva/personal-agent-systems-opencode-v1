@@ -42,4 +42,4 @@ Los comandos conservan la expansión `@.opencode/context/...` de OpenCode V1. Lo
 
 ## Dependencias
 
-`.opencode/package.json` declara `@opencode-ai/plugin`. OpenCode instala esa dependencia al iniciar. No hay servidor MCP local de DeepSeek ni paquetes propios que publicar.
+`.opencode/package.json` declara `@opencode-ai/plugin`. OpenCode instala esa dependencia al iniciar. `.opencode/plugins/env-loader.ts` lee `.env` al arrancar y aplica las claves a Brave, Tavily y DeepSeek; no hace falta exportar variables. No hay servidor MCP local de DeepSeek ni paquetes propios que publicar.

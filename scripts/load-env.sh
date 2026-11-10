@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Load an explicit allowlist of variables from .env.
-# This file is sourced by scripts/opencode-pas and scripts/smoke-test.sh.
+# This file is sourced by scripts/smoke-test.sh.
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
