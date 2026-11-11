@@ -165,4 +165,4 @@ No se usan rutas absolutas ni configuraciones específicas del equipo de desarro
 
 ## Atribución
 
-Basado en [darrenhinde/personal-agent-systems](https://github.com/darrenhinde/personal-agent-systems), confirmación `5f6a35b`. Este fork añade los proveedores Tavily y DeepSeek, la selección de proveedor por directiva, permisos por agente y la adaptación al modelo activo de OpenCode 1.19.5.
+Basado en [darrenhinde/personal-agent-systems](https://github.com/darrenhinde/personal-agent-systems), commit `5f6a35b`. Este fork añade los proveedores Tavily y DeepSeek, la selección de proveedor por directiva, permisos por agente y la adaptación al modelo activo de OpenCode 1.19.5.
