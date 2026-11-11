@@ -21,6 +21,12 @@ A fork is a copy of a project that evolves independently and preserves attributi
 
 This fork does not include a `LICENSE` file. It preserves the reference to the original project and does not add or replace licenses.
 
+## What is published
+
+This repository contains only the portable fork code. In the development workspace, that code lives in the `proyecto-ejec/` subdirectory; this repository's root corresponds to that subdirectory. The development environment used to maintain it — OAC agents, `proyecto-docs/`, `AGENTS.md` and the project intelligence in `.opencode/context/project-intelligence/` — lives outside this repository and is not published here.
+
+`.env` is never published. Use `.env.example` as the template for local credentials.
+
 ## Requirements
 
 - OpenCode 1.19.5.
